@@ -229,7 +229,7 @@ static int Init( vlc_object_t *p_this, struct filter_sys_t * p_data
     {
         ComputeChannelOperations( p_data , i_rate
                 , i_next_atomic_operation , i_source_channel_offset
-                , -d_x , d_z , d_min , 2.0 / i_nb_channels );
+                , -d_x , d_z , d_min , 2.0 );
         i_next_atomic_operation += 2;
         i_source_channel_offset++;
     }
@@ -237,7 +237,7 @@ static int Init( vlc_object_t *p_this, struct filter_sys_t * p_data
     {
         ComputeChannelOperations( p_data , i_rate
                 , i_next_atomic_operation , i_source_channel_offset
-                , d_x , d_z , d_min , 2.0 / i_nb_channels );
+                , d_x , d_z , d_min , 2.0 );
         i_next_atomic_operation += 2;
         i_source_channel_offset++;
     }
@@ -245,7 +245,7 @@ static int Init( vlc_object_t *p_this, struct filter_sys_t * p_data
     {
         ComputeChannelOperations( p_data , i_rate
                 , i_next_atomic_operation , i_source_channel_offset
-                , -d_x , 0 , d_min , 1.5 / i_nb_channels );
+                , -d_x , 0 , d_min , 1.5 );
         i_next_atomic_operation += 2;
         i_source_channel_offset++;
     }
@@ -253,7 +253,7 @@ static int Init( vlc_object_t *p_this, struct filter_sys_t * p_data
     {
         ComputeChannelOperations( p_data , i_rate
                 , i_next_atomic_operation , i_source_channel_offset
-                , d_x , 0 , d_min , 1.5 / i_nb_channels );
+                , d_x , 0 , d_min , 1.5 );
         i_next_atomic_operation += 2;
         i_source_channel_offset++;
     }
@@ -261,7 +261,7 @@ static int Init( vlc_object_t *p_this, struct filter_sys_t * p_data
     {
         ComputeChannelOperations( p_data , i_rate
                 , i_next_atomic_operation , i_source_channel_offset
-                , -d_x , d_z_rear , d_min , 1.5 / i_nb_channels );
+                , -d_x , d_z_rear , d_min , 1.5 );
         i_next_atomic_operation += 2;
         i_source_channel_offset++;
     }
@@ -269,7 +269,7 @@ static int Init( vlc_object_t *p_this, struct filter_sys_t * p_data
     {
         ComputeChannelOperations( p_data , i_rate
                 , i_next_atomic_operation , i_source_channel_offset
-                , d_x , d_z_rear , d_min , 1.5 / i_nb_channels );
+                , d_x , d_z_rear , d_min , 1.5 );
         i_next_atomic_operation += 2;
         i_source_channel_offset++;
     }
@@ -277,7 +277,7 @@ static int Init( vlc_object_t *p_this, struct filter_sys_t * p_data
     {
         ComputeChannelOperations( p_data , i_rate
                 , i_next_atomic_operation , i_source_channel_offset
-                , 0 , -d_z , d_min , 1.5 / i_nb_channels );
+                , 0 , -d_z , d_min , 1.5 );
         i_next_atomic_operation += 2;
         i_source_channel_offset++;
     }
@@ -286,11 +286,11 @@ static int Init( vlc_object_t *p_this, struct filter_sys_t * p_data
         /* having two center channels increases the spatialization effect */
         ComputeChannelOperations( p_data , i_rate
                 , i_next_atomic_operation , i_source_channel_offset
-                , d_x / 5.0 , d_z , d_min , 0.75 / i_nb_channels );
+                , d_x / 5.0 , d_z , d_min , 0.75 );
         i_next_atomic_operation += 2;
         ComputeChannelOperations( p_data , i_rate
                 , i_next_atomic_operation , i_source_channel_offset
-                , -d_x / 5.0 , d_z , d_min , 0.75 / i_nb_channels );
+                , -d_x / 5.0 , d_z , d_min , 0.75 );
         i_next_atomic_operation += 2;
         i_source_channel_offset++;
     }
@@ -298,7 +298,7 @@ static int Init( vlc_object_t *p_this, struct filter_sys_t * p_data
     {
         ComputeChannelOperations( p_data , i_rate
                 , i_next_atomic_operation , i_source_channel_offset
-                , 0 , d_z_rear , d_min , 5.0 / i_nb_channels );
+                , 0 , d_z_rear , d_min , 5.0 );
         i_next_atomic_operation += 2;
         i_source_channel_offset++;
     }
