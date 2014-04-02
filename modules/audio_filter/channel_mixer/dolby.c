@@ -77,6 +77,74 @@ static int Create( vlc_object_t *p_this )
     filter_t * p_filter = (filter_t *)p_this;
     filter_sys_t *p_sys;
 
+    /* Debug validation errors */
+    if (p_filter->fmt_in.audio.i_physical_channels != (AOUT_CHAN_LEFT|AOUT_CHAN_RIGHT))
+    {
+        msg_Err( p_filter,
+                "p_filter->fmt_in.audio.i_physical_channels != %#x",
+                (AOUT_CHAN_LEFT|AOUT_CHAN_RIGHT));
+        msg_Err( p_filter,
+                "p_filter->fmt_in.audio.i_physical_channels:   %#x",
+                 p_filter->fmt_in.audio.i_physical_channels);
+    }
+    if (!(p_filter->fmt_in.audio.i_original_channels & AOUT_CHAN_DOLBYSTEREO))
+    {
+        msg_Err(   p_filter,
+                "!(p_filter->fmt_in.audio.i_original_channels & %#x)",
+                   AOUT_CHAN_DOLBYSTEREO);
+        msg_Err(   p_filter,
+                "  p_filter->fmt_in.audio.i_original_channels:  %#x",
+                   p_filter->fmt_in.audio.i_original_channels);
+    }
+    if (aout_FormatNbChannels(&p_filter->fmt_out.audio) <= 2)
+    {
+        msg_Err( p_filter,
+                "aout_FormatNbChannels(&p_filter->fmt_out.audio) <= 2");
+        msg_Err( p_filter,
+                "aout_FormatNbChannels(&p_filter->fmt_out.audio): %3d",
+                 aout_FormatNbChannels(&p_filter->fmt_out.audio));
+    }
+    if ((p_filter->fmt_in .audio.i_original_channels & ~AOUT_CHAN_DOLBYSTEREO) !=
+        (p_filter->fmt_out.audio.i_original_channels & ~AOUT_CHAN_DOLBYSTEREO))
+    {
+        msg_Err(  p_filter,
+                "(p_filter->fmt_in .audio.i_original_channels & %#x) != "
+                "(p_filter->fmt_out.audio.i_original_channels & %#x)",
+                 ~AOUT_CHAN_DOLBYSTEREO, ~AOUT_CHAN_DOLBYSTEREO);
+        msg_Err( p_filter,
+                "p_filter->fmt_in .audio.i_original_channels: %#x",
+                 p_filter->fmt_in .audio.i_original_channels);
+        msg_Err( p_filter,
+                "p_filter->fmt_out.audio.i_original_channels: %#x",
+                 p_filter->fmt_out.audio.i_original_channels);
+    }
+    if (p_filter->fmt_in.audio.i_rate != p_filter->fmt_out.audio.i_rate)
+    {
+        msg_Err( p_filter,
+                "p_filter->fmt_in .audio.i_rate != "
+                "p_filter->fmt_out.audio.i_rate");
+        msg_Err( p_filter,
+                "p_filter->fmt_in .audio.i_rate: %d",
+                 p_filter->fmt_in .audio.i_rate);
+        msg_Err( p_filter,
+                "p_filter->fmt_out.audio.i_rate: %d",
+                 p_filter->fmt_out.audio.i_rate);
+    }
+    if (p_filter->fmt_in .audio.i_format != VLC_CODEC_FL32 ||
+        p_filter->fmt_out.audio.i_format != VLC_CODEC_FL32)
+    {
+        msg_Err( p_filter,
+                "p_filter->fmt_in .audio.i_format != %#x || "
+                "p_filter->fmt_out.audio.i_format != %#x",
+                 VLC_CODEC_FL32, VLC_CODEC_FL32);
+        msg_Err( p_filter,
+                "p_filter->fmt_in .audio.i_format:   %#x",
+                 p_filter->fmt_in .audio.i_format);
+        msg_Err( p_filter,
+                "p_filter->fmt_out.audio.i_format:   %#x",
+                 p_filter->fmt_out.audio.i_format);
+    }
+
     /* Validate audio filter format */
     if ( p_filter->fmt_in.audio.i_physical_channels != (AOUT_CHAN_LEFT|AOUT_CHAN_RIGHT)
        || ! ( p_filter->fmt_in.audio.i_original_channels & AOUT_CHAN_DOLBYSTEREO )
