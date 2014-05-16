@@ -86,6 +86,7 @@ static int Create( vlc_object_t *p_this )
         msg_Err( p_filter,
                 "p_filter->fmt_in.audio.i_physical_channels:   %#x",
                  p_filter->fmt_in.audio.i_physical_channels);
+        msg_Err( p_filter, "--------------------------------------" );
     }
     if (!(p_filter->fmt_in.audio.i_original_channels & AOUT_CHAN_DOLBYSTEREO))
     {
@@ -95,6 +96,7 @@ static int Create( vlc_object_t *p_this )
         msg_Err(   p_filter,
                 "  p_filter->fmt_in.audio.i_original_channels:  %#x",
                    p_filter->fmt_in.audio.i_original_channels);
+        msg_Err(   p_filter, "-------------------------------------" );
     }
     if (aout_FormatNbChannels(&p_filter->fmt_out.audio) <= 2)
     {
@@ -103,6 +105,7 @@ static int Create( vlc_object_t *p_this )
         msg_Err( p_filter,
                 "aout_FormatNbChannels(&p_filter->fmt_out.audio): %3d",
                  aout_FormatNbChannels(&p_filter->fmt_out.audio));
+        msg_Err( p_filter, "-----------------------------------------" );
     }
     if ((p_filter->fmt_in .audio.i_original_channels & ~AOUT_CHAN_DOLBYSTEREO) !=
         (p_filter->fmt_out.audio.i_original_channels & ~AOUT_CHAN_DOLBYSTEREO))
@@ -117,6 +120,7 @@ static int Create( vlc_object_t *p_this )
         msg_Err( p_filter,
                 "p_filter->fmt_out.audio.i_original_channels: %#x",
                  p_filter->fmt_out.audio.i_original_channels);
+        msg_Err( p_filter, "-------------------------------------" );
     }
     if (p_filter->fmt_in.audio.i_rate != p_filter->fmt_out.audio.i_rate)
     {
@@ -129,6 +133,7 @@ static int Create( vlc_object_t *p_this )
         msg_Err( p_filter,
                 "p_filter->fmt_out.audio.i_rate: %d",
                  p_filter->fmt_out.audio.i_rate);
+        msg_Err( p_filter, "-----------------------" );
     }
     if (p_filter->fmt_in .audio.i_format != VLC_CODEC_FL32 ||
         p_filter->fmt_out.audio.i_format != VLC_CODEC_FL32)
@@ -143,6 +148,7 @@ static int Create( vlc_object_t *p_this )
         msg_Err( p_filter,
                 "p_filter->fmt_out.audio.i_format:   %#x",
                  p_filter->fmt_out.audio.i_format);
+        msg_Err( p_filter, "----------------------------" );
     }
 
     /* Validate audio filter format */
